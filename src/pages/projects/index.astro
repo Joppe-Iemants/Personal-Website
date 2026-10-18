@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import { getCollection } from 'astro:content';
+const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base
+  title="Projects"
+  description="Software projects and experiments by Joppe Iemants, an Applied Computer Science student specializing in Artificial Intelligence."
+>
+  <div id="top"></div>
+  <header class="page-heading">
+    <p class="eyebrow">IDEAS INTO SOFTWARE</p>
+    <h1>
+      Projects<span class="accent">.</span>
+    </h1>
+    <p>A growing collection of things I build and explore.</p>
+  </header>
+  <EntryList entries={entries} section="projects" />
+</Base>
